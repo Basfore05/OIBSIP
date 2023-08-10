@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Calculator</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #ebebef;
+        }
+
+        .calculator {
+            background: #3a4452;
+            padding: 20px;
+            border-radius: 30px;
+            box-shadow: 8px 8px 20px rgb(78, 78, 78);
+            width: 24rem;
+            max-width: 100%;
+            max-height: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            overflow: hidden;
+        }
+
+        .button {
+            border: 0;
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            box-shadow: -8px -8px 15px rgba(255, 255, 255, 0.1), 5px 5px 15px rgba(0, 0, 0, 0.2);
+            background: transparent;
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        .button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        /* Adjusting the font size and color of the numbers on buttons */
+        .button:not([data-key]),
+        .button[data-key="="] {
+            font-size: 24px;
+            color: white;
+        }
+
+        .display {
+            grid-column: 1 / span 4;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            margin-bottom: 10px;
+        }
+
+        .textarea {
+            font-size: 28px;
+            width: 100%;
+            border: none;
+            background: transparent;
+            color: white;
+            text-align: right;
+        }
+
+        #history {
+            font-size: 14px;
+            color: #c0c0c0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <audio id="keypadSound">
+        <source src= "keypad_sound.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="calculator">
+        <div class="display">
+            <input id="TextBox" type="text" name="display" class="textarea" readonly>
+            <div id="history"></div>
+        </div>
+
+        <button class="button" data-key="AC">AC</button>
+        <button class="button" data-key="DE">DE</button>
+        <button class="button" data-key=".">.</button>
+        <button class="button" data-key="/">/</button>
+
+        <button class="button" data-key="7">7</button>
+        <button class="button" data-key="8">8</button>
+        <button class="button" data-key="9">9</button>
+        <button class="button" data-key="*">*</button>
+
+        <button class="button" data-key="4">4</button>
+        <button class="button" data-key="5">5</button>
+        <button class="button" data-key="6">6</button>
+        <button class="button" data-key="+">+</button>
+
+        <button class="button" data-key="1">1</button>
+        <button class="button" data-key="2">2</button>
+        <button class="button" data-key="3">3</button>
+        <button class="button" data-key="-">-</button>
+
+        <button class="button" data-key="00">00</button>
+        <button class="button" data-key="0">0</button>
+        <button class="button" data-key="%">%</button>
+        <button id="equal" class="button" data-key="=">=</button>
+    </div>
+
+    <script>
+        let input = document.getElementById('TextBox');
+        let history = document.getElementById('history');
+        let buttons = document.querySelectorAll('.button');
+
+        let string = "";
+
+        function playKeypadSound() {
+                const keypadSound = document.getElementById('keypadSound');
+                keypadSound.currentTime = 0; 
+                keypadSound.play();
+        }
+
+        buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                playKeypadSound();
+
+                if (e.target.dataset.key === '=') {
+                   
+                    let result;
+                    try {
+                        result = eval(string);
+                    } catch (err) {
+                      
+                        history.innerHTML = "Error";
+                        input.value = "";
+                        return;
+                    }
+
+                    
+                    if (typeof result !== 'undefined' && isFinite(result)) {
+                        string = String(result);
+                        history.innerHTML = input.value + "=";
+                        input.value = string;
+                    } else {
+                        history.innerHTML = "Error";
+                        input.value = "";
+                    }
+                } else if (e.target.dataset.key === 'AC') {
+                    string = "";
+                    input.value = "";
+                    history.innerHTML = "";
+                } else if (e.target.dataset.key === 'DE') {
+                    string = string.toString().slice(0, -1);
+                    input.value = string;
+                } else {
+                    string += e.target.dataset.key;
+                    input.value = string;
+                }
+            });
+        });
+
+        
+        document.addEventListener('keydown', (e) => {
+            if (
+                (e.key >= '0' && e.key <= '9') ||
+                e.key === '.' ||
+                e.key === '+' ||
+                e.key === '-' ||
+                e.key === '*' ||
+                e.key === '/' ||
+                e.key === '%' || 
+                e.key === 'Backspace'
+            ) {
+                const key = (e.key === 'Backspace') ? 'DE' : e.key;
+                document.querySelector(`button[data-key="${key}"]`).click();
+            } else if (e.key === 'Enter') {
+                document.querySelector(`button[data-key="="]`).click();
+            }
+        });
+
+
+    </script>
+    </div>
+</body>
+
+</html>
