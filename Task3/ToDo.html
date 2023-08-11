@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo Web App</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial Narrow', Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100vh;
+            background-color: rgb(198 ,198, 237);
+            padding: 10px;
+        }
+
+        .todo-container {
+            width: 100%;
+            max-width: 540px;
+            background: #fefefe;
+            margin: 100px auto 20px;
+            padding: 40px 30px 70px;
+            border-radius: 10px;
+            box-shadow: 8px 8px 25px #4c4c4c
+        }
+
+        .todo-container h2 {
+            font-size: 30px;
+            color: #010813;
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .todo-container h2 img {
+            width: 30px;
+            margin-left: 10px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #c9d7f1;
+            border-radius: 30px;
+            padding-left: 20px;
+            margin-bottom: 25px;
+        }
+
+        input {
+            flex: 1;
+            border: none;
+            outline: none;
+            background: transparent;
+            padding: 10px;
+            font-weight: 14px;
+        }
+
+        button {
+            border: none;
+            outline: none;
+            padding: 16px 50px;
+            background: #7af267;
+            color: #000000;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 40px;
+            box-shadow: 5px 5px 25px #302f2f
+        }
+
+        ul li {
+            list-style: none;
+            font-size: 17px;
+            padding: 12px 8px 12px 50px;
+            user-select: none;
+            cursor: pointer;
+            position: relative;
+
+        }
+
+        ul li::before {
+            content: ' ';
+            position: absolute;
+            height: 28px;
+            width: 28px;
+            border-radius: 50%;
+            background-image: url(unchecked.png);
+            background-size: cover;
+            background-position: center;
+            top: 8px;
+            left: 8px;
+        }
+
+        ul li.checked {
+            color: #555;
+            text-decoration: line-through;
+        }
+
+        ul li.checked::before {
+            background-image: url(checked.png);
+        }
+
+        ul li span {
+            position: absolute;
+            right: 0;
+            top: 5px;
+            width: 40px;
+            height: 40px;
+            font-size: 22px;
+            color: #555;
+            line-height: 40px;
+            text-align: center;
+            border-radius: 50%;
+        }
+
+        ul li span:hover {
+            background: #edeef0;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="todo-container">
+            <h2>TO - DO &nbsp;LIST <img src="icon.png"></h2>
+            <div class="row">
+                <input type="text" id="input-box" placeholder="Add your task">
+                <button onclick="addTask()">ADD</button>
+            </div>
+            <ul id="list-container">
+                <!-- <li class="checked">Task 1</li>
+                <li>Task 2</li>
+                <li>Task 3</li> -->
+            </ul>
+        </div>
+
+        <div id="auth-container">
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button onclick="login()">Log In</button>
+            <button onclick="register()">Register</button>
+        </div>
+
+        <div id="logout-container" style="display: none;">
+            <button onclick="logout()">Log Out</button>
+        </div>
+    </div>
+
+    <script>
+        const inputBox = document.getElementById("input-box");
+        const listContainer = document.getElementById("list-container");
+        const authContainer = document.getElementById("auth-container");
+        let currentUser = null;
+
+        const registeredUsers = {};
+
+        const userTasks = {}; 
+
+        function addTask() {
+                if (!currentUser) {
+                    alert("Please log in or register first.");
+                    return;
+                }
+
+                const task = inputBox.value.trim(); 
+                if (task === '') {
+                    alert("You must write something!");
+                } else {
+                    if (!userTasks[currentUser]) {
+                        userTasks[currentUser] = [];
+                    }
+                    userTasks[currentUser].push(task); 
+                    updateTaskList();
+                }
+
+                inputBox.value = ""; 
+            }
+
+        function updateTaskList() {
+                listContainer.innerHTML = ""; 
+
+                if (userTasks[currentUser]) {
+                    userTasks[currentUser].forEach(task => {
+                        const li = document.createElement("li");
+                        li.innerHTML = task;
+
+                        const span = document.createElement("span");
+                        span.innerHTML = "\u00d7";
+                        li.appendChild(span);
+
+                        listContainer.appendChild(li);
+                    });
+                }
+            }
+
+
+        listContainer.addEventListener("click", function (e) {
+            if (e.target.tagName == "LI") {
+                e.target.classList.toggle("checked");
+            } else if (e.target.tagName == "SPAN") {
+                e.target.parentElement.remove();
+            }
+        }, false);
+
+
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (registeredUsers.hasOwnProperty(username) && registeredUsers[username] === password) {
+                
+                currentUser = username;
+                authContainer.style.display = "none"; 
+                document.getElementById("logout-container").style.display = "block"; 
+                
+                 if (!userTasks[currentUser]) {
+                        userTasks[currentUser] = [];
+                    }
+                    updateTaskList();
+                } 
+
+                else {
+                alert("Invalid credentials. Please try again.");
+            }
+        }
+
+        function register() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            if (username === '' || password === '') {
+                alert("Please provide both a username and password.");
+                return;
+            }
+
+            if (registeredUsers.hasOwnProperty(username)) {
+                alert("Username already taken. Please choose a different username.");
+            } else {
+                registeredUsers[username] = password;
+                alert("Registration successful. You can now log in.");
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            authContainer.style.display = "block"; 
+            document.getElementById("logout-container").style.display = "none"; 
+
+            listContainer.innerHTML = "";
+        }
+    </script>
+</body>
+
+</html>
