@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christopher Nolan Trbute Page</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(255, 255, 255);
+        }
+
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Arial Narrow', Arial, sans-serif;
+            text-decoration: none;
+            padding: 20px;
+            margin-top: 48px;
+            margin-bottom: 23px;
+        }
+
+        h1 {
+            font-weight: 400;
+            font-size: 50px;
+            padding: 30px;
+        }
+
+        h4 {
+            padding-bottom: 20px;
+        }
+
+
+        img {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+
+        img:hover {
+            transform: scale(1.10);
+        }
+
+        .biography {
+            display: flex;
+            flex-direction: column;
+            margin-top: 50px;
+            padding-left: 200px;
+            padding-right: 200px;
+            margin-left: 180px;
+            margin-right: 180px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .biography h2 {
+            font-family: 'Arial Narrow', Arial, sans-serif;
+            font-size: 40px;
+        }
+
+        .biography p {
+            margin-top: 50px;
+        }
+
+        h2 {
+            font-family: 'Arial Narrow', Arial, sans-serif;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        .mov {
+            font-family: 'Arial Narrow', Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cards {
+            font-family: 'Arial Narrow', Arial, sans-serif;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 30px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 250px;
+            height: 400px;
+            perspective: 1000px;
+            padding: 20px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .flip-card-front {
+            background-color: #393939;
+            color: black;
+        }
+
+        .flip-card-back {
+            margin-top: 50px;
+            background-color: transparent;
+            color: rgb(39, 39, 39);
+            transform: rotateY(180deg);
+
+        }
+
+        .flip-card-inner p {
+            padding: 15px;
+        }
+
+        .buttons a {
+            text-decoration: none;
+            background-color: transparent;
+            color: #393939;
+        }
+
+        .buttons {
+            text-decoration: none;
+            margin-top: 25px;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: transparent;
+            color: #393939;
+            transition: background-color 0.4s, color 0.4s;
+            transition-duration: 0.4s;
+        }
+
+        .buttons:hover {
+            background-color: #a98484;
+        }
+
+        .buttons a:hover {
+            color: white;
+            color: white;
+        }
+
+        .inter {
+            font-size: 25px;
+        }
+
+        #prestige {
+            margin-top: 10px;
+        }
+
+        .footer {
+            display: flex;
+            flex-direction: column;
+            margin-top: 50px;
+            padding-left: 200px;
+            padding-right: 200px;
+            margin-left: 100px;
+            margin-right: 100px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .footer a {
+            text-decoration: none;
+            color: #555;
+        }
+
+        .footer a:hover {
+            color: #ee6c6c;
+        }
+
+        #social-icon {
+            display: flex;
+            background-color: #f55353;
+        }
+
+        #media {
+            display: flex;
+            margin-left: 45%;
+        }
+
+        #media img{
+            display: flex;
+            padding-top: 1.5rem;
+            padding-right: 5rem;
+            height: 1.5rem;
+            width: 1.5rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        hr {
+            width: 80%;
+            height: 3px;
+            border: 0 none;
+            margin-right: auto;
+            margin-left: auto;
+            margin-top: 80px;
+            margin-bottom: 90px;
+            background-color: #555;
+        }
+
+        .card_font {
+            font-size: 35px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>C &nbsp;&nbsp;H &nbsp;&nbsp;R &nbsp;&nbsp;I &nbsp;&nbsp;S &nbsp;&nbsp;T &nbsp;&nbsp;O &nbsp;&nbsp;P
+            &nbsp;&nbsp;H &nbsp;&nbsp;E &nbsp;&nbsp;R &nbsp; &nbsp;&nbsp;&nbsp; N &nbsp;&nbsp;O &nbsp;&nbsp;L
+            &nbsp;&nbsp;A &nbsp;&nbsp;N</h1>
+        <h4>FILM DIRECTOR &nbsp;●&nbsp; FILM PRODUCER &nbsp;●&nbsp;SCREEN WRITER</h4>
+        <h3>1998 - PRESENT</h3>
+    </div>
+
+    <div>
+        <img src="Untitled.png" alt="" srcset="">
+    </div>
+
+    <div class="biography">
+        <h2>B I O G R A P H Y</h2>
+        <p><em> Nolan is a renowned British-American filmmaker known for his captivating storytelling and
+                innovative approach to filmmaking. Born on July 30, 1970, in London, Nolan gained prominence for his
+                mind-bending narratives in films like "Memento," "Inception," and "Interstellar." With his unique style
+                blending genres and exploring complex themes, he has received critical acclaim and numerous accolades,
+                including Academy Award nominations. Nolan's meticulous attention to detail and ability to create
+                immersive
+                cinematic experiences have made him one of the most influential directors of his generation. His
+                dedication
+                to practical effects and commitment to pushing the boundaries of storytelling continue to captivate
+                audiences worldwide.</em></p>
+    </div>
+
+    <hr>
+
+    <h1 class="mov">M O V I E S</h1>
+    <div class="cards">
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="pxfuel (1).jpg" alt="Avatar" style="width:250px;height:400px;">
+                </div>
+                <div class="flip-card-back">
+                    <h1 class="card_font">MOMENTO</h1>
+                    <p>2000 film</p>
+                    <p>Mind-bending thriller blurs memory, truth, and revenge's relentless pursuit.</p>
+                    <button class="buttons"><a href="https://en.wikipedia.org/wiki/Memento_(film)" target="_blank">Read
+                            More</a></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="peakpx (4).jpg" alt="Avatar" style="width:250px;height:400px;">
+                </div>
+                <div id="prestige" class="flip-card-back">
+                    <h1 class="card_font">THE PRESTIGE</h1>
+                    <p>2006 film</p>
+                    <p>Magicians' rivalry unveils secrets, sacrifice, and an unforgettable illusionary climax.</p>
+                    <button class="buttons"><a href="https://en.wikipedia.org/wiki/The_Prestige_(film)"
+                            target="_blank">Read More</a></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="peakpx (2).jpg" alt="Avatar" style="width:250px;height:400px;">
+                </div>
+                <div class="flip-card-back">
+                    <h1 class="card_font">THE DARK KNIGHT</h1>
+                    <p>2008 film</p>
+                    <p>Gotham's hero battles chaos, a haunting villain, and moral dilemmas.</p>
+                    <button class="buttons"><a href="https://en.wikipedia.org/wiki/The_Dark_Knight" target="_blank">Read
+                            More</a></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="peakpx (3).jpg" alt="Avatar" style="width:250px;height:400px;">
+                </div>
+                <div class="flip-card-back">
+                    <h1 class="card_font">INCEPTION</h1>
+                    <p>2010 film</p>
+                    <p>Dream heist challenges perception, reality, and the power of inception.</p>
+                    <button class="buttons"><a href="https://en.wikipedia.org/wiki/Inception" target="_blank">Read
+                            More</a></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="peakpx.jpg" alt="Avatar" style="width:250px;height:400px;">
+                </div>
+                <div class="flip-card-back">
+                    <h1 class="inter">INTERSTELLAR</h1>
+                    <p>2014 film</p>
+                    <p>Epic space odyssey explores time, love, and humanity's survival</p>
+                    <button class="buttons"><a href="https://en.wikipedia.org/wiki/Interstellar_(film)"
+                            target="_blank">Read More</a></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="peakpx (5).jpg" alt="Avatar" style="width:250px;height:400px;">
+                </div>
+                <div class="flip-card-back">
+                    <h1 class="card_font">DUNKIRK</h1>
+                    <p>2017 film</p>
+                    <p>Tense WWII evacuation tests courage, resilience, and the will to survive.</p>
+                    <button class="buttons"><a href="https://en.wikipedia.org/wiki/Dunkirk_(2017_film)"
+                            target="_blank">Read More</a></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="peakpx (1).jpg" alt="Avatar" style="width:250px;height:400px;">
+                </div>
+                <div class="flip-card-back">
+                    <h1 class="card_font">TENET</h1>
+                    <p>2020 film</p>
+                    <p>Time-bending thriller twists reality, espionage, and a high-stakes temporal war.</p>
+                    <button class="buttons"><a href="https://en.wikipedia.org/wiki/Tenet_(film)" target="_blank">Read
+                            More</a></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div class="footer">
+        <p><em>Made by - <a href="" target="_blank"> Bishal Basfore</a></em></p>
+    </div>
+
+    <div id="social-icons">
+        <div id="media">
+            <a href="https://www.linkedin.com/in/bishal-basfore-131309222/" target="_blank"><img src="linkedin.png" alt="Linkedin"><p> Linkedin</p></a>  
+            <a href="https://github.com/Basfore05" target="_blank"><img src="github.png" alt="Linkedin"><p> Github </p></a>
+        </div>
+    </div>
+
+</html>
